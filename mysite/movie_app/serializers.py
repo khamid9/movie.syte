@@ -105,7 +105,7 @@ class DirectorDetailSerializer(serializers.ModelSerializer):
 class ActorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Actor
-        fields = ['full_name','last_name']
+        fields = ['full_name']
 
 class ActorListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -118,8 +118,7 @@ class ActorDetailSerializer(serializers.ModelSerializer):
     actor_movies = MovieListSerializer(many=True, read_only=True)
     class Meta:
         model = Actor
-        fields = ['full_name','actor_photo',
-                  'birth_date','birth_date','bio','actor_movies']
+        fields = ['full_name','actor_photo','birth_date','bio','actor_movies']
 
 class MovieVideoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -141,23 +140,23 @@ class RatingSerializer(serializers.ModelSerializer):
         fields = ['user', 'stars', 'created_date']
 
 
-# ДОБАВЛЕНО: Сериализатор для создания рейтинга
 class RatingCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
-        fields = ['movie', 'stars']
+        fields = ['movie', 'stars','user']
 
 
 class ReviewSerializer(serializers.ModelSerializer):
-    created_at = serializers.DateTimeField(format='%d-%m-%Y-%H-%M')
+    created_date = serializers.DateTimeField(format='%d-%m-%Y-%H-%M')  # ИСПРАВЛЕНО: created_at → created_date
     user = UserProfileReviewSerializer()
 
     class Meta:
         model = Review
-        fields = ['user', 'comment', 'parent', 'created_at']
+        fields = ['user', 'comment', 'parent', 'created_date']  # ИСПРАВЛЕНО: created_at → created_date
+
 
 class MovieDetailSerializer(serializers.ModelSerializer):
-    year = serializers.DateField(format='%d-%m-%Y-%M-%H')
+    year = serializers.DateField(format='%d-%m-%Y')
     country = CountrySerializer(many=True)
     director = DirectorSerializer(many=True)
     genre = GenreNameSerializer(many=True)

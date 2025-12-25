@@ -107,7 +107,6 @@ class MovieDetailAPIView(generics.RetrieveAPIView):
     serializer_class = MovieDetailSerializer
 
 
-# ИЗМЕНЕНО: Только создание рейтинга
 class RatingCreateAPIView(generics.CreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingCreateSerializer
