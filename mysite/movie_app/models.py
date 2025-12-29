@@ -37,7 +37,7 @@ class Genre(models.Model):
 class Country(models.Model):
     country_name = models.CharField(max_length=40, unique=True)
 
-    def __str__(self):  # ИСПРАВЛЕНО
+    def __str__(self):
         return self.country_name
 
 class Director(models.Model):

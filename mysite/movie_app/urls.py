@@ -9,7 +9,8 @@ from .views import (UserProfileListAPIView, UserProfileDetailAPIView, CategoryLi
                     MovieListAPIView, MovieDetailAPIView,
                     RatingCreateAPIView,  # ИЗМЕНЕНО
                     ReviewViewSet, ReviewLikeViewSet,
-                    FavoriteViewSet, FavoriteItemViewSet, HistoryViewSet)
+                    FavoriteViewSet, FavoriteItemViewSet, HistoryViewSet,RegisterView,LoginView,LogoutView)
+from rest_framework_simplejwt.views import TokenRefreshView
 
 from rest_framework import routers
 
@@ -37,5 +38,9 @@ urlpatterns = [
     path('users/<int:pk>/', UserProfileDetailAPIView.as_view(), name='userprofile_detail'),
     path('actor/', ActorListAPIView.as_view(), name='actor_list'),
     path('actor/<int:pk>/', ActorDetailAPIView.as_view(), name='actor_detail'),
-    path('rating/', RatingCreateAPIView.as_view(), name='rating_create'),  # ДОБАВЛЕНО
+    path('rating/', RatingCreateAPIView.as_view(), name='rating_create'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('register/',RegisterView.as_view(),name='register'),
+    path('login/',LoginView.as_view(),name='login'),
+    path('logout/',LogoutView.as_view(),name='logout'),
 ]
